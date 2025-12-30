@@ -256,7 +256,6 @@ class Tools:
                                 "data": {
                                     "description": random.choice(complete_messages),
                                     "done": True,
-                                    "hidden": True,
                                 },
                             }
                         )
