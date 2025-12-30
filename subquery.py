@@ -5,7 +5,7 @@ author_url: https://github.com/LordOfTheRats
 git_url: https://github.com/LordOfTheRats/open-webui-zammad-tool
 description: Native-mode subquery that self-drives tool execution (multi-tool) using Open WebUI internals, preserving files/knowledge and enabled tools (excluding Subquery).
 required_open_webui_version: 0.6.0
-version: 0.6.8
+version: 0.6.9
 licence: MIT
 """
 
