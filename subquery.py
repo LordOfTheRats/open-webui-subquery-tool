@@ -5,7 +5,7 @@ author_url: https://github.com/LordOfTheRats
 git_url: https://github.com/LordOfTheRats/open-webui-zammad-tool
 description: Native-mode subquery that self-drives tool execution (multi-tool) using Open WebUI internals, preserving files/knowledge and enabled tools (excluding Subquery).
 required_open_webui_version: 0.6.0
-version: 0.6.7
+version: 0.6.8
 licence: MIT
 """
 
@@ -144,6 +144,8 @@ class Tools:
                     "🎪 Time for some recursive shenanigans!",
                     "🚀 Launching subquery probe into the unknown...",
                     "💭 Asking myself important questions...",
+                    "🎯 Starting subquery session...",
+                    "🔄 Entering subquery mode...",
                 ]
                 await __event_emitter__(
                     {
@@ -245,6 +247,8 @@ class Tools:
                             "🏁 Finished! Closing the loop...",
                             "💫 Success! Collapsing the recursion...",
                             "🎊 Nailed it! Coming back up for air...",
+                            "✓ Subquery finished!",
+                            "🔙 Returning from subquery...",
                         ]
                         await __event_emitter__(
                             {
@@ -258,25 +262,15 @@ class Tools:
                         )
                     return (msg.get("content") or "").strip()
 
-                # Emit status about tool calls
-                if __event_emitter__:
+                # Emit status about tool calls (only for multiple tools)
+                if __event_emitter__ and len(tool_calls) >= 2:
                     tool_names = [tc["function"]["name"] for tc in tool_calls]
                     # Convert function names to readable format
                     readable_names = [
                         _make_function_name_readable(self, name) for name in tool_names
                     ]
 
-                    if len(tool_calls) == 1:
-                        single_tool_messages = [
-                            f"🔧 Summoning '{readable_names[0]}'",
-                            f"🪄 Casting '{readable_names[0]}' spell",
-                            f"📞 Calling '{readable_names[0]}'",
-                            f"🎯 Deploying '{readable_names[0]}'",
-                            f"⚡ Activating '{readable_names[0]}'",
-                            f"🎪 Running '{readable_names[0]}'",
-                        ]
-                        description = random.choice(single_tool_messages)
-                    elif len(tool_calls) == 2:
+                    if len(tool_calls) == 2:
                         double_tool_messages = [
                             f"🛠️ Running: '{readable_names[0]}' + '{readable_names[1]}'",
                             f"👯 Executing: '{readable_names[0]}' and '{readable_names[1]}'",
